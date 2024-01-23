@@ -5,7 +5,9 @@ const Home = () => {
   return (
     <>
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <section className="page">
+        <Outlet></Outlet>
+      </section>
     </>
   );
 };

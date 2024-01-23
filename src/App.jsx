@@ -6,6 +6,7 @@ const App = () => {
     {
       path: '/',
       element: <Home></Home>,
+      errorElement: <Error></Error>,
       children: [
         {
           // Kind of Making it a home Page
