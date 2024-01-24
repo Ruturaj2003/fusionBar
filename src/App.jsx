@@ -1,11 +1,21 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { About, Home, Landing, Error, NewsLetter, Cocktail } from './pages';
+import {
+  About,
+  Home,
+  Landing,
+  Error,
+  NewsLetter,
+  Cocktail,
+  SinglePageError,
+} from './pages';
+import { loader as landingLoader } from './pages/Landing';
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
       element: <Home></Home>,
+      // below Error Page is AKA Global Error Page
       errorElement: <Error></Error>,
       children: [
         {
@@ -15,6 +25,8 @@ const App = () => {
           // This Path is Realtive to the Parent
           // path: 'landing',
           element: <Landing></Landing>,
+          errorElement: <SinglePageError></SinglePageError>,
+          loader: landingLoader,
         },
         {
           path: 'cocktail',
