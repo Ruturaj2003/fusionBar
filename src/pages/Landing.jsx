@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useLoaderData } from 'react-router-dom';
+import CocktailList from '../components/CocktailList';
 
 export const loader = async () => {
   const searchTerm = '';
@@ -17,6 +18,10 @@ const cocktailSearchUrl =
 const Landing = () => {
   const { drinks, searchTerm } = useLoaderData();
   console.log(drinks);
-  return <h3>Landing</h3>;
+  return (
+    <>
+      <CocktailList drinks={drinks}></CocktailList>
+    </>
+  );
 };
 export default Landing;
