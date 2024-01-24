@@ -1,3 +1,5 @@
+import Wrapper from '../assets/wrappers/CocktailList';
+import CocktailCard from './CocktailCard';
 const CocktailList = ({ drinks }) => {
   if (!drinks) {
     return (
@@ -17,6 +19,12 @@ const CocktailList = ({ drinks }) => {
       glass: strGlass,
     };
   });
-  return <div>CocktailList</div>;
+  return (
+    <Wrapper>
+      {formattedDrinks.map((item) => {
+        return <CocktailCard key={item.id} {...item} />;
+      })}
+    </Wrapper>
+  );
 };
 export default CocktailList;
