@@ -14,18 +14,21 @@ const SearchCocktailsQuery = (searchTerm) => {
   };
 };
 
-export const loader = async ({ request }) => {
-  console.log(request);
-  const url = new URL(request.url);
+export const loader =
+  (queryClient) =>
+  async ({ request }) => {
+    console.log(request);
+    const url = new URL(request.url);
 
-  const searchTerm = url.searchParams.get('search') || '';
-  //
+    const searchTerm = url.searchParams.get('search') || '';
+    //
+    await queryClient.ensureQueryData(SearchCocktailsQuery(searchTerm));
 
-  return {
-    // drinks: resp.data.drinks,
-    searchTerm,
+    return {
+      // drinks: resp.data.drinks,
+      searchTerm,
+    };
   };
-};
 
 const cocktailSearchUrl =
   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
