@@ -17,7 +17,6 @@ const cocktailSearchUrl =
 
 const Landing = () => {
   const { drinks, searchTerm } = useLoaderData();
-  console.log(drinks);
   return (
     <>
       <CocktailList drinks={drinks}></CocktailList>
