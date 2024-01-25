@@ -1,20 +1,26 @@
 import axios from 'axios';
-import { Form, redirect } from 'react-router-dom';
+import { Form, redirect, useNavigation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const newsLetterUrl = 'https://www.course-api.com/cocktails-newsletter';
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-
-  const resp = await axios.post(newsLetterUrl, data);
-  console.log(resp);
-  toast.success(resp.data.msg);
-
-  return redirect('/');
+  try {
+    const response = await axios.post(newsLetterUrl, data);
+    console.log(response);
+    toast.success(response.data.msg);
+    return redirect('/');
+  } catch (error) {
+    console.log(error);
+    toast.error(error?.response?.data?.msg);
+    return error;
+  }
 };
 
 const NewsLetter = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
   return (
     <Form className="form" method="POST">
       <h4 style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -63,8 +69,9 @@ const NewsLetter = () => {
         type="submit"
         className="btn btn-block"
         style={{ marginTop: '0.5rem' }}
+        disabled={isSubmitting}
       >
-        submit
+        {isSubmitting ? 'Submitting' : 'Submit'}
       </button>
     </Form>
   );
