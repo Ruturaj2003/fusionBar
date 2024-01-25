@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { Link, useLoaderData, useRouteLoaderData } from 'react-router-dom';
+import {
+  Link,
+  Navigate,
+  useLoaderData,
+  useRouteLoaderData,
+} from 'react-router-dom';
 import Wrapper from '../assets/wrappers/CocktailPage';
 
 const singleCocktailUrl =
@@ -14,6 +19,8 @@ export const loader = async ({ params }) => {
 };
 const Cocktail = () => {
   const { id, data } = useLoaderData();
+
+  if (!data) return <Navigate to="/" />;
 
   const singleDrink = data.drinks[0];
   const {
